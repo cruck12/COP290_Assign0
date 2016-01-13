@@ -3,7 +3,12 @@ package com.sahil.assignment0;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -41,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //TODO Add a settings menu maybe?
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -57,16 +63,28 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //shows About page activity
     public void showAbout(){
         Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
 
-    //Onclick of button send the details
+    //Onclick of button send the details if internet is connected, otherwise ask to connect to WiFi
+    //Todo ask WiFi or Data depending on situation
     public void submitMessage(View view){
-        sendRequest();
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo network = cm.getActiveNetworkInfo();
+        boolean isConnected = network !=null && network.isConnectedOrConnecting();
+        if(isConnected) {
+            sendRequest();
+        }
+        else{
+            DialogFragment showInternet= new showInternetDialogFragment();
+            showInternet.show(getFragmentManager(),"showInternet");
+        }
     }
 
+    // Creates the params for JSON file which will be sent as request
     //// TODO: 1/10/2016 Integrity check of parameters
     public HashMap<String,String> getParams(){
         final EditText name1 =(EditText) findViewById(R.id.editText_Name1);
@@ -80,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static String response_message,response_title;
-    //Does not work yet
+
+    //method: Sends the JSON request based on the params generated from text fields
     public void sendRequest(){
         final JSONObject jsonDetails= new JSONObject(getParams());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,URL,jsonDetails, new Response.Listener<JSONObject>(){
@@ -88,8 +107,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try{
-                    VolleyLog.v("Response:%n %s", response.toString(4));
+                    //VolleyLog.v("Response:%n %s", response.toString(4));
                     response_message =response.getString("RESPONSE_MESSAGE");
+                    response_title=response.getString("RESPONSE_SUCCESS");
+                    response_title="Response Status: ".concat(response_title);
                     DialogFragment message=new showResponseDialogFragment();
                     message.show(getFragmentManager(),"message");
                 }
@@ -110,12 +131,37 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue mQueue = Volley.newRequestQueue(this);
         mQueue.add(request);
     }
-    //It is working
+    //Shows Dialog Displaying the Result of POST query
     public static class showResponseDialogFragment extends DialogFragment{
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState){
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage(response_message).setTitle("response_title");
+            builder.setMessage(response_message).setTitle(response_title);
+            return builder.create();
+        }
+    }
+
+    //Shows dialog if internet is not connected to connect to the internet
+    //TODO Possibly add another button, one to connect to WiFi and another for Data
+    public static class showInternetDialogFragment extends DialogFragment{
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState){
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("Please Connect to the Internet to continue").setTitle("Not Connected to Internet")
+            .setNegativeButton(R.string.cancel,new DialogInterface.OnClickListener(){
+                //Cancels the dialog
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    showInternetDialogFragment.this.getDialog().cancel();
+                }
+            })
+            .setPositiveButton(R.string.connect, new DialogInterface.OnClickListener() {
+                //Starts activity to open WiFi settings
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                }
+            });
             return builder.create();
         }
     }

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 /**
  * Created by Sahil on 1/9/2016.
  */
+//Shows About Page view
 public class AboutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
