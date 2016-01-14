@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText entry3 =(EditText) findViewById(R.id.editText_Entry3);
 
         HashMap<String,String> params = new HashMap<String,String>();
-        params.put("team_name", team_name.getText().toString());
+        params.put("teamname", team_name.getText().toString());
         params.put("entry1",entry1.getText().toString());
         params.put("name1", name1.getText().toString());
         params.put("entry2",entry2.getText().toString());
