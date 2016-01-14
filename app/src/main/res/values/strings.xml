@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">Assignment0</string>
-    <string name="member1">Enter Name</string>
-    <string name="member_entry1">Enter Entry No</string>
+    <string name="teamView1">Team</string>
+    <string name="teamName">Name</string>
+    <string name="textView1">Member 1</string>
+    <string name="member1">Name</string>
+    <string name="member_entry1">Entry Number</string>
+    <string name="textView2">Member 2</string>
+    <string name="member2">Name</string>
+    <string name="member_entry2">Entry Number</string>
+    <string name="textView3">Member 3</string>
+    <string name="member3">Name</string>
+    <string name="member_entry3">Entry Number</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_about">About</string>
     <string name="send_button">Submit</string>
