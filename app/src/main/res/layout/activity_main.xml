@@ -33,7 +33,7 @@
         android:textSize="10pt"
         android:hint="@string/textView1"
         android:id="@+id/textView1"
-        android:paddingTop="16dp"/>
+        android:paddingTop="8dp"/>
 
     <EditText
         android:layout_below="@id/textView1"

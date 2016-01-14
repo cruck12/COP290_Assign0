@@ -87,12 +87,22 @@ public class MainActivity extends AppCompatActivity {
     // Creates the params for JSON file which will be sent as request
     //// TODO: 1/10/2016 Integrity check of parameters
     public HashMap<String,String> getParams(){
+        final EditText team_name =(EditText) findViewById(R.id.teamName);
         final EditText name1 =(EditText) findViewById(R.id.editText_Name1);
         final EditText entry1 =(EditText) findViewById(R.id.editText_Entry1);
+        final EditText name2 =(EditText) findViewById(R.id.editText_Name2);
+        final EditText entry2 =(EditText) findViewById(R.id.editText_Entry2);
+        final EditText name3 =(EditText) findViewById(R.id.editText_Name3);
+        final EditText entry3 =(EditText) findViewById(R.id.editText_Entry3);
 
         HashMap<String,String> params = new HashMap<String,String>();
+        params.put("team_name", team_name.getText().toString());
         params.put("entry1",entry1.getText().toString());
         params.put("name1", name1.getText().toString());
+        params.put("entry2",entry2.getText().toString());
+        params.put("name2", name2.getText().toString());
+        params.put("entry3",entry3.getText().toString());
+        params.put("name3", name3.getText().toString());
 
         return params;
     }
@@ -165,5 +175,8 @@ public class MainActivity extends AppCompatActivity {
             return builder.create();
         }
     }
+
+    //To check if any fields in the form are empty
+    
 
 }
