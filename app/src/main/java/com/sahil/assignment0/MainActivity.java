@@ -20,8 +20,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -110,14 +108,15 @@ public class MainActivity extends AppCompatActivity {
     public static String response_message,response_title;
 
     //method: Sends the JSON request based on the params generated from text fields
+    /*
     public void sendRequest(){
         final JSONObject jsonDetails= new JSONObject(getParams());
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,URL,jsonDetails, new Response.Listener<JSONObject>(){
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST ,URL ,new JSONObject(getParams()) , new Response.Listener<JSONObject>(){
             //Send JSON request and handle the response
             @Override
             public void onResponse(JSONObject response) {
                 try{
-                    //VolleyLog.v("Response:%n %s", response.toString(4));
+                    VolleyLog.v("Request:%n %s", jsonDetails.toString(4));
                     response_message =response.getString("RESPONSE_MESSAGE");
                     response_title=response.getString("RESPONSE_SUCCESS");
                     response_title="Response Status: ".concat(response_title);
@@ -141,6 +140,37 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue mQueue = Volley.newRequestQueue(this);
         mQueue.add(request);
     }
+    */
+    public void sendRequest() {
+        CustomJsonRequest request = new CustomJsonRequest(Request.Method.POST, URL, getParams(), new Response.Listener<JSONObject>() {
+            //Send JSON request and handle the response
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    //VolleyLog.v("Request:%n %s", jsonDetails.toString(4));
+                    response_message = response.getString("RESPONSE_MESSAGE");
+                    response_title = response.getString("RESPONSE_SUCCESS");
+                    response_title = "Response Status: ".concat(response_title);
+                    DialogFragment message = new showResponseDialogFragment();
+                    message.show(getFragmentManager(), "message");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener(){
+            //Handle Error Responses
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                response_message =error.getMessage();
+                DialogFragment message=new showResponseDialogFragment();
+                message.show(getFragmentManager(),"message");
+            }
+        });
+        request.setTag(reqTag);
+        RequestQueue mQueue = Volley.newRequestQueue(this);
+        mQueue.add(request);
+    }
+
     //Shows Dialog Displaying the Result of POST query
     public static class showResponseDialogFragment extends DialogFragment{
         @Override
