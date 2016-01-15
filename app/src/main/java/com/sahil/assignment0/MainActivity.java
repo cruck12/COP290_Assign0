@@ -31,10 +31,18 @@ public class MainActivity extends AppCompatActivity {
 
     final String URL = "http://agni.iitd.ernet.in/cop290/assign0/register/";
     final String reqTag = "JSONRequest";
+    RequestQueue mQueue ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mQueue = Volley.newRequestQueue(this.getApplicationContext());
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        if(mQueue!=null)
+            mQueue.cancelAll(reqTag);
     }
 
     @Override
@@ -167,7 +175,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         request.setTag(reqTag);
-        RequestQueue mQueue = Volley.newRequestQueue(this);
         mQueue.add(request);
     }
 
