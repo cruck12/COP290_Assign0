@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -78,16 +79,20 @@ public class MainActivity extends AppCompatActivity {
     //Onclick of button send the details if internet is connected, otherwise ask to connect to WiFi
     //Todo ask WiFi or Data depending on situation
     public void submitMessage(View view){
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo network = cm.getActiveNetworkInfo();
-        boolean isConnected = network !=null && network.isConnectedOrConnecting();
-        if(isConnected) {
-            sendRequest();
-        }
-        else{
-            DialogFragment showInternet= new showInternetDialogFragment();
-            showInternet.show(getFragmentManager(),"showInternet");
-        }
+            if(!checkEmpty()) {
+                Toast.makeText(this, "Some fields are empty!", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo network = cm.getActiveNetworkInfo();
+                boolean isConnected = network != null && network.isConnectedOrConnecting();
+                if (isConnected) {
+                    sendRequest();
+                } else {
+                    DialogFragment showInternet = new showInternetDialogFragment();
+                    showInternet.show(getFragmentManager(), "showInternet");
+                }
+            }
     }
 
     // Creates the params for JSON file which will be sent as request
@@ -213,7 +218,48 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     //To check if any fields in the form are empty
-    
+    public boolean checkEmpty()
+    {
+        EditText team_name =(EditText) findViewById(R.id.teamName);
+        String s = team_name.getText().toString();
+        if(s.length()==0) {
+            return false;
+        }
+        EditText name1 =(EditText) findViewById(R.id.editText_Name1);
+        s = name1.getText().toString();
+        if(s.length()==0) {
+            return false;
+        }
+        EditText entry1 =(EditText) findViewById(R.id.editText_Entry1);
+        s = entry1.getText().toString();
+        if(s.length()==0) {
+            return false;
+        }
+        EditText name2 =(EditText) findViewById(R.id.editText_Name2);
+        s = name2.getText().toString();
+        if(s.length()==0) {
+            return false;
+        }
+        EditText entry2 =(EditText) findViewById(R.id.editText_Entry2);
+        s = entry2.getText().toString();
+        if(s.length()==0) {
+            return false;
+        }
+        EditText name3 =(EditText) findViewById(R.id.editText_Name3);
+        s = name3.getText().toString();
+        if(s.length()==0) {
+            return false;
+        }
+        EditText entry3 =(EditText) findViewById(R.id.editText_Entry3);
+        s = entry3.getText().toString();
+        if(s.length()==0) {
+            return false;
+        }
+        return true;
+    }
+
+
 
 }
