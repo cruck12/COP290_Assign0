@@ -82,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
             if(!checkEmpty()) {
                 Toast.makeText(this, "Some fields are empty!", Toast.LENGTH_SHORT).show();
             }
+            else if(!checkEntry())
+            {
+                Toast.makeText(this, "The entry numbers are not right!", Toast.LENGTH_SHORT).show();
+            }
             else {
                 ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo network = cm.getActiveNetworkInfo();
@@ -243,19 +247,57 @@ public class MainActivity extends AppCompatActivity {
         }
         EditText entry2 =(EditText) findViewById(R.id.editText_Entry2);
         s = entry2.getText().toString();
-        if(s.length()==0) {
+        return s.length()!=0;
+    }
+
+    //To check if any string has the entry number format
+    public boolean checkString (String s)
+    {
+        char c;
+        int d;
+        if(s.length()!=11)
+        {
             return false;
         }
-        EditText name3 =(EditText) findViewById(R.id.editText_Name3);
-        s = name3.getText().toString();
-        if(s.length()==0) {
+        for(int i=0;i<4;i++) {
+            c = s.charAt(i);
+            d = (int) c;
+            if(d<48 || d>57) {
+                return false;
+            }
+        }
+        for(int i=6;i<s.length();i++) {
+            c = s.charAt(i);
+            d = (int) c;
+            if(d<48 || d>57) {
+                return false;
+            }
+        }
+        return true;
+    }
+    //To check if the entry number fields has the entry number format
+    public boolean checkEntry()
+    {
+        String s;
+        EditText entry1 =(EditText) findViewById(R.id.editText_Entry1);
+        s = entry1.getText().toString();
+        if(!checkString(s))
+        {
+            return false;
+        }
+        EditText entry2 =(EditText) findViewById(R.id.editText_Entry2);
+        s = entry2.getText().toString();
+        if(!checkString(s))
+        {
             return false;
         }
         EditText entry3 =(EditText) findViewById(R.id.editText_Entry3);
         s = entry3.getText().toString();
-        return s.length() != 0;
+        if(s.length()!=0 && (!checkString(s)))
+        {
+            return false;
+        }
+        return true;
     }
-
-
 
 }
