@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Creates the params for JSON file which will be sent as request
-    //// TODO: 1/10/2016 Integrity check of parameters
     public HashMap<String,String> getParams(){
         final EditText team_name =(EditText) findViewById(R.id.teamName);
         final EditText name1 =(EditText) findViewById(R.id.editText_Name1);
@@ -254,10 +253,7 @@ public class MainActivity extends AppCompatActivity {
         }
         EditText entry3 =(EditText) findViewById(R.id.editText_Entry3);
         s = entry3.getText().toString();
-        if(s.length()==0) {
-            return false;
-        }
-        return true;
+        return s.length() != 0;
     }
 
 
