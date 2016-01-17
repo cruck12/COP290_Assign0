@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <!-- Material teal 500 and 700 respectively -->
+        <item name="colorPrimary">#FF009688</item>
+        <item name="colorPrimaryDark">#FF00796B</item>
+        <item name="android:navigationBarColor">#FF004D40</item>
+    </style>
+</resources>
