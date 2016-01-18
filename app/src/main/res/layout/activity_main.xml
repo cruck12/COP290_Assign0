@@ -39,7 +39,8 @@
             android:hint="@string/mem_select"
             android:layout_below="@id/teamName"
             android:id="@+id/mems"
-            android:paddingTop="16dp"/>
+            android:paddingTop="16dp"
+            android:textColorHint="#FF004D40"/>
 
         <Spinner
             android:id="@+id/no_members"
