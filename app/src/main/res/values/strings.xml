@@ -18,4 +18,5 @@
     <string name="connect">Connect</string>
     <string name="ok">OK</string>
     <string name="resetButton">Clear</string>
+    <string name="mem_select">No. of Members</string>
 </resources>

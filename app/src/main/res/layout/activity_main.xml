@@ -33,7 +33,26 @@
             android:paddingTop="8dp"/>
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10pt"
+            android:hint="@string/mem_select"
             android:layout_below="@id/teamName"
+            android:id="@+id/mems"
+            android:paddingTop="16dp"/>
+
+        <Spinner
+            android:id="@+id/no_members"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/teamName"
+            android:layout_toRightOf="@id/mems"
+            android:paddingTop="6dp"
+            android:paddingLeft="10dp"
+            android:spinnerMode="dropdown"/>
+
+        <TextView
+            android:layout_below="@id/no_members"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="10pt"
