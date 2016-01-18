@@ -247,7 +247,25 @@ public class MainActivity extends AppCompatActivity {
         }
         EditText entry2 =(EditText) findViewById(R.id.editText_Entry2);
         s = entry2.getText().toString();
-        return s.length()!=0;
+        if(s.length()==0) {
+            return false;
+        }
+        EditText name3 =(EditText) findViewById(R.id.editText_Name3);
+        s = name3.getText().toString();
+        EditText entry3 =(EditText) findViewById(R.id.editText_Entry3);
+        String s1 = entry3.getText().toString();
+        if(s.length()==0 && s1.length()==0)
+        {
+            return true;
+        }
+        else if (s.length()!=0 && s1.length()!=0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     //To check if any string has the entry number format
