@@ -20,6 +20,7 @@
             android:textSize="10pt"
             android:hint="@string/teamView1"
             android:id="@+id/teamView1"
+            android:textColorHint="#FF004D40"
             />
 
         <EditText
@@ -38,7 +39,8 @@
             android:textSize="10pt"
             android:hint="@string/textView1"
             android:id="@+id/textView1"
-            android:paddingTop="8dp"/>
+            android:paddingTop="8dp"
+            android:textColorHint="#FF004D40"/>
 
         <EditText
             android:layout_below="@id/textView1"
@@ -65,6 +67,7 @@
             android:hint="@string/textView2"
             android:id="@+id/textView2"
             android:paddingTop="16dp"
+            android:textColorHint="#FF004D40"
             />
 
         <EditText
@@ -92,6 +95,7 @@
             android:hint="@string/textView3"
             android:id="@+id/textView3"
             android:paddingTop="16dp"
+            android:textColorHint="#FF004D40"
             />
 
         <EditText
