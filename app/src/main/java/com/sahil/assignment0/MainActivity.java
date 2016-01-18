@@ -186,6 +186,26 @@ public class MainActivity extends AppCompatActivity {
         mQueue.add(request);
     }
 
+    //Clears the text fields
+    public void resetFields(View view) {
+        final EditText team_name =(EditText) findViewById(R.id.teamName);
+        final EditText name1 =(EditText) findViewById(R.id.editText_Name1);
+        final EditText entry1 =(EditText) findViewById(R.id.editText_Entry1);
+        final EditText name2 =(EditText) findViewById(R.id.editText_Name2);
+        final EditText entry2 =(EditText) findViewById(R.id.editText_Entry2);
+        final EditText name3 =(EditText) findViewById(R.id.editText_Name3);
+        final EditText entry3 =(EditText) findViewById(R.id.editText_Entry3);
+
+        team_name.setText("");
+        name1.setText("");
+        name2.setText("");
+        name3.setText("");
+        entry1.setText("");
+        entry2.setText("");
+        entry3.setText("");
+
+    }
+
     //Shows Dialog Displaying the Result of POST query
     public static class showResponseDialogFragment extends DialogFragment{
         @Override
@@ -297,19 +317,19 @@ public class MainActivity extends AppCompatActivity {
     public boolean checkEntry()
     {
         String s;
-        EditText entry1 =(EditText) findViewById(R.id.editText_Entry1);
+        final EditText entry1 =(EditText) findViewById(R.id.editText_Entry1);
         s = entry1.getText().toString();
         if(!checkString(s))
         {
             return false;
         }
-        EditText entry2 =(EditText) findViewById(R.id.editText_Entry2);
+        final EditText entry2 =(EditText) findViewById(R.id.editText_Entry2);
         s = entry2.getText().toString();
         if(!checkString(s))
         {
             return false;
         }
-        EditText entry3 =(EditText) findViewById(R.id.editText_Entry3);
+        final EditText entry3 =(EditText) findViewById(R.id.editText_Entry3);
         s = entry3.getText().toString();
         if(s.length()!=0 && (!checkString(s)))
         {
