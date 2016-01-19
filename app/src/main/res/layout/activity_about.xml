@@ -23,7 +23,8 @@
         android:textSize="14pt"
         android:text="Developed By:"
         android:layout_marginTop="10pt"
-        android:textColor="#FF004D40" />
+        android:textColor="#FF004D40"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
