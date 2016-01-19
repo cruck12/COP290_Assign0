@@ -50,9 +50,9 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
         dropdown.setOnItemSelectedListener(this);
     }
 
+    //to diasble the text fields when 2 members are selected and enable them when 3 are selected
     public void onItemSelected(AdapterView<?> parent, View view,int pos, long id)
     {
-        // An item was selected. You can retrieve the selected item using
         String s=parent.getItemAtPosition(pos).toString();
         if(s.equals("3"))
         {
@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements OnItemSelectedLis
 
     public void onNothingSelected(AdapterView<?> parent)
     {
-        // Another interface callback
     }
     @Override
     protected void onStop(){
