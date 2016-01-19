@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -24,13 +25,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnItemSelectedListener {
 
     final String URL = "http://agni.iitd.ernet.in/cop290/assign0/register/";
     final String reqTag = "JSONRequest";
@@ -45,6 +47,34 @@ public class MainActivity extends AppCompatActivity {
         String[] items = new String[]{"2", "3"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
+        dropdown.setOnItemSelectedListener(this);
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view,int pos, long id)
+    {
+        // An item was selected. You can retrieve the selected item using
+        String s=parent.getItemAtPosition(pos).toString();
+        if(s.equals("3"))
+        {
+            final EditText name3 =(EditText) findViewById(R.id.editText_Name3);
+            final EditText entry3 =(EditText) findViewById(R.id.editText_Entry3);
+            name3.setEnabled(true);
+            entry3.setEnabled(true);
+        }
+        else if(s.equals("2"))
+        {
+            final EditText name3 =(EditText) findViewById(R.id.editText_Name3);
+            final EditText entry3 =(EditText) findViewById(R.id.editText_Entry3);
+            name3.setEnabled(false);
+            entry3.setEnabled(false);
+            name3.setText("");
+            entry3.setText("");
+        }
+    }
+
+    public void onNothingSelected(AdapterView<?> parent)
+    {
+        // Another interface callback
     }
     @Override
     protected void onStop(){
