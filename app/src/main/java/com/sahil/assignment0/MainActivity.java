@@ -14,7 +14,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -22,13 +25,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnItemSelectedListener {
 
     final String URL = "http://agni.iitd.ernet.in/cop290/assign0/register/";
     final String reqTag = "JSONRequest";
@@ -38,6 +42,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mQueue = Volley.newRequestQueue(this.getApplicationContext());
+        //initialize the spinner to display 2 and 3
+        Spinner dropdown = (Spinner)findViewById(R.id.no_members);
+        String[] items = new String[]{"2", "3"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
+        dropdown.setOnItemSelectedListener(this);
+    }
+
+    //to diasble the text fields when 2 members are selected and enable them when 3 are selected
+    public void onItemSelected(AdapterView<?> parent, View view,int pos, long id)
+    {
+        String s=parent.getItemAtPosition(pos).toString();
+        if(s.equals("3"))
+        {
+            final EditText name3 =(EditText) findViewById(R.id.editText_Name3);
+            final EditText entry3 =(EditText) findViewById(R.id.editText_Entry3);
+            name3.setEnabled(true);
+            entry3.setEnabled(true);
+        }
+        else if(s.equals("2"))
+        {
+            final EditText name3 =(EditText) findViewById(R.id.editText_Name3);
+            final EditText entry3 =(EditText) findViewById(R.id.editText_Entry3);
+            name3.setEnabled(false);
+            entry3.setEnabled(false);
+            name3.setText("");
+            entry3.setText("");
+        }
+    }
+
+    public void onNothingSelected(AdapterView<?> parent)
+    {
     }
     @Override
     protected void onStop(){
@@ -270,22 +306,23 @@ public class MainActivity extends AppCompatActivity {
         if(s.length()==0) {
             return false;
         }
-        EditText name3 =(EditText) findViewById(R.id.editText_Name3);
-        s = name3.getText().toString();
-        EditText entry3 =(EditText) findViewById(R.id.editText_Entry3);
-        String s1 = entry3.getText().toString();
-        if(s.length()==0 && s1.length()==0)
+        Spinner d = (Spinner)findViewById(R.id.no_members);
+        String spinner = d.getSelectedItem().toString();
+        if(spinner.equals("3"))
         {
-            return true;
+            EditText name3 = (EditText) findViewById(R.id.editText_Name3);
+            s = name3.getText().toString();
+            if(s.length()==0) {
+                return false;
+            }
+            EditText entry3 = (EditText) findViewById(R.id.editText_Entry3);
+            s = entry3.getText().toString();
+            if(s.length()==0) {
+                return false;
+            }
+
         }
-        else if (s.length()!=0 && s1.length()!=0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return true;
     }
 
     //To check if any string has the entry number format

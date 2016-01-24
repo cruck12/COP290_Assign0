@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:textSize="14pt"
         android:text="Simple App to send a POST request to an HTTP server to Register a team"
+        android:textColor="#FF004D40"
         />
     <TextView
         android:layout_width="match_parent"
@@ -22,26 +23,29 @@
         android:textSize="14pt"
         android:text="Developed By:"
         android:layout_marginTop="10pt"
-        />
+        android:textColor="#FF004D40" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14pt"
         android:text="Sahil Bhatnagar"
         android:layout_marginTop="1pt"
+        android:textColor="#FF004D40"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14pt"
         android:text="Gautam Jain"
+        android:textColor="#FF004D40"
         android:layout_marginTop="1pt"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14pt"
-        android:text="Gurkirat Singh"
+        android:text="Gurkirat Singh Bajwa"
+        android:textColor="#FF004D40"
         android:layout_marginTop="1pt"
         />
 
